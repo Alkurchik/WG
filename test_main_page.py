@@ -1,5 +1,7 @@
 from .pages.main_page import MainPage
 from .pages.login_page import LoginPage
+import pytest
+
 
 def test_guest_can_go_to_register_page(browser):
     link = "http://automationpractice.com/index.php?controller=authentication&back=my-account"

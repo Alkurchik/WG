@@ -1,7 +1,25 @@
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import random
+
 
 class MainPage(BasePage):
     def go_to_register_page(self):
-        login_link = self.browser.find_element(By.CSS_SELECTOR, "#SubmitCreate")
-        login_link.click()
+        driver = self.browser
+
+        driver.find_element(By.CSS_SELECTOR, "#email_create").send_keys('kurchik.sasha@gmail.com')
+        driver.find_element(By.CSS_SELECTOR, "#SubmitCreate").click()
+
+        if WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'create_account_error'))):
+
+            driver.find_element(By.CSS_SELECTOR, "#email_create").send_keys(str(random.randint(0, 99)))
+            driver.find_element(By.CSS_SELECTOR, "#SubmitCreate").click()
+
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, '//h3[text()="Your personal information"]'))
+        )
+
+
