@@ -4,6 +4,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import random
 
+"""
+Для запуска тестов использовать команду:
+pytest -s -v --browser_name=firefox test_main_page.py --alluredir=allure_results
+
+Для просмотра результатов:
+allure serve allure_results
+"""
 
 class MainPage(BasePage):
     def go_to_register_page(self):
