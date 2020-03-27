@@ -15,7 +15,7 @@ class MainPage(BasePage):
         if WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.ID, 'create_account_error'))):
 
-            driver.find_element(By.CSS_SELECTOR, "#email_create").send_keys(str(random.randint(0, 99)))
+            driver.find_element(By.CSS_SELECTOR, "#email_create").send_keys(str(random.randint(0, 999)))
             driver.find_element(By.CSS_SELECTOR, "#SubmitCreate").click()
 
         WebDriverWait(driver, 10).until(

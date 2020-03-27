@@ -69,15 +69,15 @@ class LoginPage(BasePage):
         # WebDriverWait(driver, 10).until(
         #     EC.presence_of_element_located((By.XPATH, '//h1[text()="My account"]')))
 
-        if WebDriverWait(driver, 10).until(
+        if WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located((By.XPATH, '//h1[text()="My account"]'))):
+            True
+        elif WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'alert-danger'))):
             self.browser.save_screenshot('Error.png')
             allure.attach(self.browser.get_screenshot_as_png(), name='Error.png',
                           attachment_type=allure.attachment_type.PNG)
             assert False, 'The user is not registered'
-
-        elif self.browser.find_element(By.XPATH, '//h1[text()="My account"]').click():
-            True
 
         # elif WebDriverWait(driver, 10).until(
         #         EC.presence_of_element_located((By.XPATH, '//h1[text()="My account"]'))):
@@ -89,3 +89,5 @@ class LoginPage(BasePage):
     def choise_select(self, select, option):
         self.browser.find_element(By.ID, select).click()
         self.browser.find_element(By.CSS_SELECTOR, option).click()
+
+
